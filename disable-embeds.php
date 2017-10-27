@@ -20,5 +20,5 @@ define('DSBEBD_PATH', dirname(DSBEBD_FILE));
 define('DSBEBD_VERSION', '1.0.0');
 
 // Load main class
-require_once(DSBEBD_PATH.'/core/core.php');
+require_once DSBEBD_PATH.'/core/core.php';
 DSBEBD_Core::instance();
