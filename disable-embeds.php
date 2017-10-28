@@ -6,8 +6,9 @@ Description: Disables both external and internal embedding functions to avoid sl
 Version: 1.0.0
 Author: LittleBizzy
 Author URI: https://www.littlebizzy.com
-License: GPL3
+License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
+Prefix: DSBEBD
 */
 
 // Avoid script calls via plugin URL
