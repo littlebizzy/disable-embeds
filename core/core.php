@@ -125,7 +125,7 @@ final class DSBEBD_Core {
 		remove_filter('woocommerce_short_description', 'wc_do_oembeds');
 
 		// Alter Tiny MCE plugins
-		add_filter( 'tiny_mce_plugins', array(&$this, 'cleanTinyMCE'));
+		add_filter('tiny_mce_plugins', array(&$this, 'cleanTinyMCE'));
 
 		// Alter rewrite rules
 		add_filter('rewrite_rules_array', array(&$this, 'cleanRules'));
