@@ -1,12 +1,12 @@
 === Disable Embeds ===
 
 Contributors: littlebizzy
-Tags: disable, remove, embeds, oembeds, iframes
+Tags: disable, embeds, remove, oembed, iframes
 Requires at least: 4.4
 Tested up to: 4.8
 Requires PHP: 7.0
 Multisite support: No
-Stable tag: 1.0.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Prefix: DSBEBD
@@ -17,6 +17,27 @@ Disables both external and internal embedding functions to avoid slow page rende
 
 Disables both external and internal embedding functions to avoid slow page render, instability and SEO issues, and to improve overall loading speed.
 
+* [Plugin Homepage](https://www.littlebizzy.com/plugins/disable-embeds)
+* [Plugin GitHub](https://github.com/littlebizzy/disable-embeds)
+* [SlickStack.io](https://slickstack.io)
+
+#### The Long Version #####
+
+1. disable all oEmbed functions (e.g. disable automatic converting hyperlinks to iframe/embed HTML)
+2. prevent other sites from embed your site (outgoing embeds)
+3. prevent own site from embed other pages from own site (internal embeds)
+4. remove all embed javascript from footer
+
+For the 1 and 4 points, I have inspected all the WP core hooks and I think I have neutralized all of them, but let me know if you detect or suspect about any client side embed related code.
+
+There are several differences between the existing Disable Embeds plugin and this one, the main one regards to the_content filter using the autoembed function, so I do not understand why that plugin does not disable it due its importance (I suppose WP changed the way to call this filter, which he did that plugin ineffective).
+
+Another feature is that disables completely the embeds in the WP post editor (the previous plugin only disables a deprecated TinyMCE view, so it still shows embeds).
+
+About the 2 and 3 points, the internal query var that manages the embed display is disabled, and also the params are removed from the rewrite rules, so I think this behaviour is disabled, both for internal or external embeds attempts.
+
+About the last point I removed the related hooks, I hope it does not cause any conflict, at the moment I have not detected any client side effects.
+
 #### Compatibility ####
 
 This plugin has been designed for use on LEMP (Nginx) web servers with PHP 7.0 and MySQL 5.7 to achieve best performance. All of our plugins are meant for single site WordPress installations only; for both performance and security reasons, we highly recommend against using WordPress Multisite for the vast majority of projects.
@@ -24,16 +45,21 @@ This plugin has been designed for use on LEMP (Nginx) web servers with PHP 7.0 a
 #### Plugin Features ####
 
 * Settings Page: No
-* PRO Version Available: No
-* Includes Media: No
+* Premium Version Available: No
+* Includes Media (Images, Icons, Etc): No
 * Includes CSS: No
-* Database Storage: No
+* Database Storage: Yes
   * Transients: No
-  * Options: No
-* Database Queries: No
-* Must-Use Support: Yes
+  * Options: Yes
+  * Creates New Tables: No
+* Database Queries: Backend Only
+* Must-Use Support: Yes (Use With [Autoloader](https://github.com/littlebizzy/autoloader))
 * Multisite Support: No
-* Uninstalls Data: No
+* Uninstalls Data: Yes
+
+#### WP Admin Notices ####
+
+This plugin generates multiple [Admin Notices](https://codex.wordpress.org/Plugin_API/Action_Reference/admin_notices) in the WP Admin dashboard. The first is a notice that fires during plugin activation which recommends several related free plugins that we believe will enhance this plugin's features; this notice will re-appear approximately once every 5 months as our code and recommendations evolve. The second is a notice that fires a few days after plugin activation which asks for a 5-star rating of this plugin on its WordPress.org profile page. This notice will re-appear approximately once every 8 months. These notices can be dismissed by clicking the (x) symbol in the upper right of the notice box. These notices may confuse certain users, but are appreciated by the majority of our userbase, who understand that these notices support our free contributions to the WordPress community. If you feel that these notices are too "annoying" than we encourage you to consider one or more of our upcoming premium plugins that combine several free plugin features into a single control panel. Another alternative would be to develop your own plugins for WordPress, if you feel that supporting free plugin authors is not something that interests you.
 
 #### Code Inspiration ####
 
@@ -45,7 +71,16 @@ This plugin was partially inspired either in "code or concept" by the open-sourc
 
 We invite you to check out a few other related free plugins that our team has also produced that you may find especially useful:
 
-* (n/a)
+* [Force HTTPS](https://wordpress.org/plugins/force-https-littlebizzy/)
+* [Server Status](https://wordpress.org/plugins/server-status-littlebizzy/)
+* [Disable Emojis](https://wordpress.org/plugins/disable-emojis-littlebizzy/)
+* [Disable XML-RPC](https://wordpress.org/plugins/disable-xml-rpc-littlebizzy/)
+* [Disable Author Pages](https://wordpress.org/plugins/disable-author-pages-littlebizzy/)
+* [Disable Search](https://wordpress.org/plugins/disable-search-littlebizzy/)
+* [404 To Homepage](https://wordpress.org/plugins/404-to-homepage-littlebizzy/)
+* [Remove Query Strings](https://wordpress.org/plugins/remove-query-strings-littlebizzy/)
+* [Remove Category Base](https://wordpress.org/plugins/remove-category-base-littlebizzy/)
+* [Index Autoload](https://wordpress.org/plugins/index-autoload-littlebizzy/)
 
 #### Special Thanks ####
 
@@ -65,7 +100,7 @@ We released this plugin in response to our managed hosting clients asking for be
 
 1. Upload to `/wp-content/plugins/disable-embeds-littlebizzy`
 2. Activate via WP Admin > Plugins
-3. Test plugin is working
+3. Test plugin is working by pasting a media URL (such as a YouTube video) into your post editor
 
 == Frequently Asked Questions ==
 
@@ -78,6 +113,10 @@ For speed, security, and simplicity, there is no settings page.
 Please avoid leaving negative reviews in order to get a feature implemented. Instead, we kindly ask that you post your feedback on the wordpress.org support forums by tagging this plugin in your post. If needed, you may also contact our homepage.
 
 == Changelog ==
+
+= 1.0.1 =
+* added recommended plugins
+* added rating request
 
 = 1.0.0 =
 * initial release
