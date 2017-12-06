@@ -3,7 +3,7 @@
 Plugin Name: Disable Embeds
 Plugin URI: https://wordpress.org/plugins/disable-embeds-littlebizzy/
 Description: Disables both external and internal embedding functions to avoid slow page render, instability and SEO issues, and to improve overall loading speed.
-Version: 1.0.1
+Version: 1.0.2
 Author: LittleBizzy
 Author URI: https://www.littlebizzy.com
 License: GPLv3
@@ -22,7 +22,7 @@ if (!function_exists('add_action'))
 // This plugin constants
 define('DSBEBD_FILE', __FILE__);
 define('DSBEBD_PATH', dirname(DSBEBD_FILE));
-define('DSBEBD_VERSION', '1.0.1');
+define('DSBEBD_VERSION', '1.0.2');
 
 // Load main class
 require_once DSBEBD_PATH.'/core/core.php';
