@@ -1,6 +1,7 @@
 === Disable Embeds ===
 
 Contributors: littlebizzy
+Donate link: https://www.patreon.com/littlebizzy
 Tags: disable, remove, embeds, iframes, oembed
 Requires at least: 4.4
 Tested up to: 4.9
