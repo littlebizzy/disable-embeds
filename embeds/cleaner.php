@@ -56,7 +56,7 @@ class Cleaner extends Helpers\Singleton {
 	/**
 	 * Remove the embed query var.
 	 */
-	private function queryVar() {
+	public function queryVar() {
 		global $wp;
 		$wp->public_query_vars = array_diff($wp->public_query_vars, array('embed'));
 	}
@@ -66,7 +66,7 @@ class Cleaner extends Helpers\Singleton {
 	/**
 	 * Remove the_content filter
 	 */
-	private function contentFilter() {
+	public function contentFilter() {
 		global $wp_embed;
 		remove_filter('the_content', array($wp_embed, 'autoembed'), 8);
 	}
