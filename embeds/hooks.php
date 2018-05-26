@@ -39,7 +39,7 @@ class Hooks {
 		$this->plugin = $plugin;
 
 		// Init hook
-		add_action('init', array(&$this, 'init'), PHP_INT_MAX);
+		add_action('init', [&$this, 'init'], PHP_INT_MAX);
 	}
 
 
