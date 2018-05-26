@@ -1,12 +1,15 @@
 <?php
 
+// Subpackage namespace
+namespace LittleBizzy\DisableEmbeds;
+
 /**
  * Admin Notices class
  *
  * @package WordPress
  * @subpackage Admin Notices
  */
-final class DSBEBD_Admin_Notices {
+final class Admin_Notices {
 
 
 
@@ -123,15 +126,14 @@ final class DSBEBD_Admin_Notices {
 	 */
 	private function __construct($plugin_file = null) {
 
+		// Prefix from plugin constants
+		$this->prefix = PREFIX.'_an_';
+
 		// Main plugin file
 		$this->plugin_file = isset($plugin_file)? $plugin_file : __FILE__;
 
 		// Uninstall hook endpoint
 		register_uninstall_hook($this->plugin_file, array(__CLASS__, 'uninstall'));
-
-		// Prefix from the class name
-		$classname = explode('_', __CLASS__);
-		$this->prefix = strtolower($classname[0]);
 
 		// Check notices
 		if (is_admin()) {
