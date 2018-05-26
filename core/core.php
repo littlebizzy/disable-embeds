@@ -56,7 +56,7 @@ final class Core extends Helpers\Singleton {
 	/**
 	 * Plugin deactivation
 	 */
-	public static function deactivation() {
+	public function deactivation() {
 		add_filter('rewrite_rules_array', [$this->plugin->factory->cleaner, 'rules']);
 		flush_rewrite_rules();
 	}
