@@ -9,19 +9,12 @@ namespace LittleBizzy\DisableEmbeds\Helpers;
  * @package Disable Embeds
  * @subpackage Helpers
  */
-class Singleton {
+abstract class Singleton {
 
 
 
 	// Properties
 	// ---------------------------------------------------------------------------------------------------
-
-
-
-	/**
-	 * Singleton class
-	 */
-	protected static $instance;
 
 
 
@@ -40,14 +33,17 @@ class Singleton {
 	/**
 	 * Create or retrieve instance
 	 */
-	public static function instance($plugin = null) {
+	final public static function instance($plugin = null) {
+
+		// Local instance
+		static $instance = null;
 
 		// Check instance
-		if (!isset(self::$instance))
-			self::$instance = new static($plugin);
+		if (!isset($instance))
+			$instance = new static($plugin);
 
 		// Done
-		return self::$instance;
+		return $instance;
 	}
 
 
@@ -70,6 +66,13 @@ class Singleton {
 	 * Pseudo constructor
 	 */
 	protected function onConstruct() {}
+
+
+
+	/**
+	 * Disallow clone use and overwriting
+	 */
+	final private function __clone() {}
 
 
 
