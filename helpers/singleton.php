@@ -44,7 +44,7 @@ class Singleton {
 
 		// Check instance
 		if (!isset(self::$instance))
-			self::$instance = new self($plugin);
+			self::$instance = new static($plugin);
 
 		// Done
 		return self::$instance;
@@ -55,7 +55,7 @@ class Singleton {
 	/**
 	 * Constructor
 	 */
-	private function __construct($plugin) {
+	protected function __construct($plugin) {
 
 		// Copy plugin object
 		$this->plugin = $plugin;
