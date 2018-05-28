@@ -61,7 +61,7 @@ class Hooks {
 			add_filter('oembed_ttl', '__return_zero');
 
 			// Process detected exceptions
-			add_filter('oembed_providers', [&$this, 'providers']);
+			add_filter('oembed_providers',  [&$this, 'providers']);
 			add_filter('pre_oembed_result', [&$this, 'preResults'], 10, 2);
 
 		// No exceptions
@@ -142,8 +142,13 @@ class Hooks {
 
 
 
+	// WP filters
+	// ---------------------------------------------------------------------------------------------------
+
+
+
 	/**
-	 * Allow by provider
+	 * Allow only specific providers
 	 */
 	public function providers($currentProviders) {
 
@@ -192,7 +197,6 @@ class Hooks {
 		if (empty($oembed->providers) || !is_array($oembed->providers))
 			return '';
 
-
 		/* From core WP_oEmbed class */
 
 		$provider = false;
@@ -211,7 +215,6 @@ class Hooks {
 				break;
 			}
 		}
-
 
 		/* Back to plugin code */
 
