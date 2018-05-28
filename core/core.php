@@ -29,6 +29,9 @@ final class Core extends Helpers\Singleton {
 		// Init factory object
 		$this->plugin->factory = new Factory($this->plugin);
 
+		// Allowed sources from constant
+		$this->plugin->allowed = $this->plugin->factory->allowed();
+
 		// Create registrar object and set hooks handler
 		$this->plugin->factory->registrar->setHandler($this);
 

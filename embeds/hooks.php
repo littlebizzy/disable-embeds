@@ -49,9 +49,6 @@ class Hooks {
 	 */
 	public function init() {
 
-		// Allowed source from constant
-		$this->plugin->allowed = defined('DISABLE_EMBEDS_ALLOWED_SOURCES')? array_map('trim', explode(',', ''.DISABLE_EMBEDS_ALLOWED_SOURCES)) : [];
-
 		// Remove from query vars
 		$this->plugin->factory->cleaner->queryVar();
 
@@ -67,7 +64,7 @@ class Hooks {
 	/**
 	 * Handle hooks
 	 */
-	public function handle() {
+	private function handle() {
 
 		// Remove content feed filter
 		remove_filter('the_content_feed', 			'_oembed_filter_feed_content');

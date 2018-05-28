@@ -36,6 +36,15 @@ class Factory extends Helpers\Factory {
 
 
 	/**
+	 * Allowed object
+	 */
+	protected function createAllowed() {
+		return new Embeds\Allowed;
+	}
+
+
+
+	/**
 	 * Registrar object
 	 */
 	protected function createRegistrar() {
