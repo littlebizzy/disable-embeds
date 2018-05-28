@@ -55,7 +55,12 @@ class Hooks {
 		// Check allowed sources
 		if ($this->plugin->allowed->detected()) {
 
-			// Any exception detected
+			// Disallow Embed cache
+			global $wp_embed;
+			$wp_embed->usecache = false;
+			add_filter('oembed_ttl', '__return_zero');
+
+			// Process detected exceptions
 			add_filter('oembed_providers', [&$this, 'providers']);
 			add_filter('pre_oembed_result', [&$this, 'preResults'], 10, 2);
 
