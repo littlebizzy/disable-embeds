@@ -52,11 +52,22 @@ class Hooks {
 		// Remove from query vars
 		$this->plugin->factory->cleaner->queryVar();
 
-		// Remove from content
-		$this->plugin->factory->cleaner->contentFilter();
+		// Check allowed sources
+		if ($this->plugin->allowed->detected()) {
 
-		// Actions and filters
-		$this->handle();
+			// Any exception detected
+			add_filter('oembed_providers', [&$this, 'providers']);
+			add_filter('pre_oembed_result', [&$this, 'preResults'], 10, 2);
+
+		// No exceptions
+		} else {
+
+			// Remove from content
+			$this->plugin->factory->cleaner->contentFilter();
+
+			// Actions and filters
+			$this->handle();
+		}
 	}
 
 
@@ -122,6 +133,85 @@ class Hooks {
 
 		// Alter rewrite rules
 		add_filter('rewrite_rules_array', [$this->plugin->factory->cleaner, 'rules']);
+	}
+
+
+
+	/**
+	 * Allow by provider
+	 */
+	public function providers($currentProviders) {
+
+		// Check input value
+		if (empty($currentProviders) || !is_array($currentProviders))
+			return $currentProviders;
+
+		// Init
+		$providers = [];
+		$allowedServices = $this->plugin->allowed->services();
+
+		// Enum original providers
+		foreach ($currentProviders as $regExp => $info) {
+
+			// Check provider info
+			if (empty($info) || !is_array($info))
+				continue;
+
+			// Breakdown URL parts
+			$parts = @parse_url($info[0]);
+			if (empty($parts) || !is_array($parts) || empty($parts['host']))
+				continue;
+
+			// Extract name from domain
+			$domain = explode('.', $parts['host']);
+			$domain = in_array($domain[0], ['www', 'api', 'publish', 'public-api', 'embed', 'read'])? $domain[1] : $domain[0];
+
+			// Add provider if it match
+			if (in_array(strtolower($domain), $allowedServices))
+				$providers[$regExp] = $info;
+		}
+
+		// Done
+		return $providers;
+	}
+
+
+
+	/**
+	 * Filter pre-results to avoid automatic discover process
+	 */
+	public function preResults($result, $url) {
+
+		// Filtered (by this plugin) providers;
+		$oembed = _wp_oembed_get_object();
+		if (empty($oembed->providers) || !is_array($oembed->providers))
+			return '';
+
+
+		/* From core WP_oEmbed class */
+
+		$provider = false;
+
+		foreach ( $oembed->providers as $matchmask => $data ) {
+			list( $providerurl, $regex ) = $data;
+
+			// Turn the asterisk-type provider URLs into regex
+			if ( !$regex ) {
+				$matchmask = '#' . str_replace( '___wildcard___', '(.+)', preg_quote( str_replace( '*', '___wildcard___', $matchmask ), '#' ) ) . '#i';
+				$matchmask = preg_replace( '|^#http\\\://|', '#https?\://', $matchmask );
+			}
+
+			if ( preg_match( $matchmask, $url ) ) {
+				$provider = str_replace( '{format}', 'json', $providerurl ); // JSON is easier to deal with than XML
+				break;
+			}
+		}
+
+
+		/* Back to plugin code */
+
+		// Check allowed
+		return empty($provider)? '' : $result;
 	}
 
 
