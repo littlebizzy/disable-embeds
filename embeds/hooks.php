@@ -73,10 +73,10 @@ class Hooks {
 		remove_filter('the_content_feed', 			'_oembed_filter_feed_content');
 
 		// Abort embed libraries loading
-		remove_action( 'plugins_loaded', 			'wp_maybe_load_embeds', 0);
+		remove_action('plugins_loaded', 			'wp_maybe_load_embeds', 0);
 
 		// No auto-embedding support
-		add_filter( 'pre_option_embed_autourls', 	'__return_false');
+		add_filter('pre_option_embed_autourls', 	'__return_false');
 
 		// Avoid oEmbed auto discovery
 		add_filter('embed_oembed_discover', 	 	'__return_false');
@@ -89,28 +89,28 @@ class Hooks {
 		remove_action('wp_head', 					'wp_oembed_add_discovery_links');
 		remove_action('wp_head', 					'wp_oembed_add_host_js');
 
-		remove_action( 'embed_head', 				'enqueue_embed_scripts', 1);
-		remove_action( 'embed_head', 				'print_emoji_detection_script');
-		remove_action( 'embed_head', 				'print_embed_styles');
-		remove_action( 'embed_head', 				'wp_print_head_scripts', 20);
-		remove_action( 'embed_head', 				'wp_print_styles', 20);
-		remove_action( 'embed_head', 				'wp_no_robots');
-		remove_action( 'embed_head', 				'rel_canonical');
-		remove_action( 'embed_head', 				'locale_stylesheet', 30);
+		remove_action('embed_head', 				'enqueue_embed_scripts', 1);
+		remove_action('embed_head', 				'print_emoji_detection_script');
+		remove_action('embed_head', 				'print_embed_styles');
+		remove_action('embed_head', 				'wp_print_head_scripts', 20);
+		remove_action('embed_head', 				'wp_print_styles', 20);
+		remove_action('embed_head', 				'wp_no_robots');
+		remove_action('embed_head', 				'rel_canonical');
+		remove_action('embed_head', 				'locale_stylesheet', 30);
 
-		remove_action( 'embed_content_meta', 		'print_embed_comments_button');
-		remove_action( 'embed_content_meta', 		'print_embed_sharing_button');
+		remove_action('embed_content_meta', 		'print_embed_comments_button');
+		remove_action('embed_content_meta', 		'print_embed_sharing_button');
 
-		remove_action( 'embed_footer', 				'print_embed_sharing_dialog');
-		remove_action( 'embed_footer', 				'print_embed_scripts');
-		remove_action( 'embed_footer', 				'wp_print_footer_scripts', 20);
+		remove_action('embed_footer', 				'print_embed_sharing_dialog');
+		remove_action('embed_footer', 				'print_embed_scripts');
+		remove_action('embed_footer', 				'wp_print_footer_scripts', 20);
 
-		remove_filter( 'excerpt_more', 				'wp_embed_excerpt_more', 20);
-		remove_filter( 'the_excerpt_embed', 		'wptexturize');
-		remove_filter( 'the_excerpt_embed', 		'convert_chars');
-		remove_filter( 'the_excerpt_embed', 		'wpautop');
-		remove_filter( 'the_excerpt_embed', 		'shortcode_unautop');
-		remove_filter( 'the_excerpt_embed', 		'wp_embed_excerpt_attachment');
+		remove_filter('excerpt_more', 				'wp_embed_excerpt_more', 20);
+		remove_filter('the_excerpt_embed', 			'wptexturize');
+		remove_filter('the_excerpt_embed', 			'convert_chars');
+		remove_filter('the_excerpt_embed', 			'wpautop');
+		remove_filter('the_excerpt_embed', 			'shortcode_unautop');
+		remove_filter('the_excerpt_embed', 			'wp_embed_excerpt_attachment');
 
 		// Remove data and results filters
 		remove_filter('oembed_dataparse', 			'wp_filter_oembed_result', 10);
