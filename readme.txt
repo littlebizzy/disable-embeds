@@ -46,7 +46,7 @@ About the 2 and 3 points, the internal query var that manages the embed display 
 
 About the last point I removed the related hooks, I hope it does not cause any conflict, at the moment I have not detected any client side effects.
 
-    `define('DISABLE_EMBEDS_ALLOWED_SOURCES', 'youtube, twitter, facebook, etc');
+    define('DISABLE_EMBEDS_ALLOWED_SOURCES', 'twitter, youtube');
 
 The following sources (only) can be whitelisted using the above defined constant:
 
@@ -62,6 +62,16 @@ The following sources (only) can be whitelisted using the above defined constant
 * Vimeo
 
 ...all other sources are blacklisted for performance reasons, including internal site URLs.
+
+Version 1.1.0:
+
+The code is completely refactored using namespaces and object encapsulation.
+
+With or without the allowed sources constant, the plugin behavior removes any reference to embeds code as it did in the previous version.
+
+But with detected allowed sources, the plugin allows the WP 'autoembed' filter in the post content, but limiting its execution only to the services indicated in the plugin constant, so it disables the WP autodiscovery embed feature and its associated "postmeta cache".
+
+Note: The supported scribd URLs must follow the format "https://www.scribd.com/doc/" or "https://www.scribd.com/doc/" to be detected by the WordPress oEmbed system, because from scribd.com portal they expose these URLs using "/document/" instead "/doc/".
 
 #### Compatibility ####
 
