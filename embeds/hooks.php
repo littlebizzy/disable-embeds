@@ -49,6 +49,9 @@ class Hooks {
 	 */
 	public function init() {
 
+		// Actions and filters
+		$this->handle();
+
 		// Remove from query vars
 		$this->plugin->factory->cleaner->queryVar();
 
@@ -68,8 +71,8 @@ class Hooks {
 			// Remove from content
 			$this->plugin->factory->cleaner->contentFilter();
 
-			// Actions and filters
-			$this->handle();
+			// Alter Tiny MCE plugins
+			add_filter('tiny_mce_plugins', [$this->plugin->factory->cleaner, 'tinyMCE']);
 		}
 	}
 
@@ -130,9 +133,6 @@ class Hooks {
 
 		// WooCommerce embeds in short description
 		remove_filter('woocommerce_short_description', 'wc_do_oembeds');
-
-		// Alter Tiny MCE plugins
-		add_filter('tiny_mce_plugins', [$this->plugin->factory->cleaner, 'tinyMCE']);
 
 		// Alter rewrite rules
 		add_filter('rewrite_rules_array', [$this->plugin->factory->cleaner, 'rules']);
