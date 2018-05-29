@@ -73,4 +73,15 @@ class Cleaner extends Helpers\Singleton {
 
 
 
+	/**
+	 * Disables oEmbed postmeta cache
+	 */
+	public function oembedCache() {
+		global $wp_embed;
+		$wp_embed->usecache = false;
+		add_filter('oembed_ttl', '__return_zero');
+	}
+
+
+
 }
