@@ -7,7 +7,7 @@ Requires at least: 4.4
 Tested up to: 4.9
 Requires PHP: 7.0
 Multisite support: No
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Prefix: DSBEBD
@@ -218,11 +218,14 @@ Please avoid leaving negative reviews in order to get a feature implemented. Ins
 
 == Changelog ==
 
+= 1.1.1 =
+* updated plugin meta
+
 = 1.1.0 =
-* plugin completely re-written using PHP namespaces
-* object-oriented code
+* plugin re-written using PHP namespaces
+* plugin uses object-oriented codebase
 * support for `DISABLE_EMBEDS_ALLOWED_SOURCES`
-* (now can whitelist certain embed sources)
+* (whitelist certain embed sources using a defined constant)
 
 = 1.0.3 =
 * added warning for Multisite installations
@@ -234,7 +237,8 @@ Please avoid leaving negative reviews in order to get a feature implemented. Ins
 
 = 1.0.1 =
 * added recommended plugins notice
-* added rating request notice
+* added WP.org rating request notice
 
 = 1.0.0 =
 * initial release
+* tested with PHP 7.0
