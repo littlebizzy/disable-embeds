@@ -25,6 +25,13 @@ class Hooks {
 
 
 
+	/**
+	 * Allowed object
+	 */
+	private $allowed;
+
+
+
 	// Initialization
 	// ---------------------------------------------------------------------------------------------------
 
@@ -55,8 +62,11 @@ class Hooks {
 		// Remove from query vars
 		$this->plugin->factory->cleaner->queryVar();
 
+		// Allowed object
+		$this->allowed = $this->plugin->factory->allowed();
+
 		// Check allowed sources
-		if ($this->plugin->allowed->detected()) {
+		if ($this->allowed->detected()) {
 
 			// Disallow oEmbed cache
 			$this->plugin->factory->cleaner->oembedCache();
@@ -156,7 +166,7 @@ class Hooks {
 
 		// Init
 		$providers = [];
-		$allowedServices = $this->plugin->allowed->services();
+		$allowedServices = $this->allowed->services();
 
 		// Enum original providers
 		foreach ($currentProviders as $regExp => $info) {
