@@ -7,7 +7,7 @@ Requires at least: 4.4
 Tested up to: 5.0
 Requires PHP: 7.0
 Multisite support: No
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 Prefix: DSBEBD
@@ -75,7 +75,7 @@ Any of our WordPress plugins may also be loaded as "Must-Use" plugins by using o
 
     /* Plugin Meta */
     define('DISABLE_NAG_NOTICES', true);
-    
+
     /* Disable Embeds Functions */
     define('DISABLE_EMBEDS_ALLOWED_SOURCES', 'none');
 
