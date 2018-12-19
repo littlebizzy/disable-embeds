@@ -6,7 +6,7 @@ namespace LittleBizzy\DisableEmbeds\Helpers;
 /**
  * AutoLoader class
  *
- * @package Disable Embeds
+ * @package WordPress Plugin
  * @subpackage Helpers
  */
 final class Loader {
@@ -58,12 +58,14 @@ final class Loader {
 	public static function register($name = null) {
 
 		// Check instance
-		if (!isset(self::$instance))
+		if (!isset(self::$instance)) {
 			self::$instance = new self;
+		}
 
 		// Check request
-		if (!empty($name))
+		if (!empty($name)) {
 			self::$instance->load($name);
+		}
 	}
 
 
@@ -75,8 +77,9 @@ final class Loader {
 
 		// Split current namespace
 		$namespace = explode('\\', __NAMESPACE__);
-		if (count($namespace) < 2)
+		if (count($namespace) < 2) {
 			return;
+		}
 
 		// Vendor and package values
 		$this->vendor = $namespace[0];

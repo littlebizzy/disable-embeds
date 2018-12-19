@@ -6,7 +6,7 @@ namespace LittleBizzy\DisableEmbeds\Helpers;
 /**
  * Object Factory base class
  *
- * @package Disable Embeds
+ * @package WordPress Plugin
  * @subpackage Helpers
  */
 class Factory {
@@ -59,8 +59,20 @@ class Factory {
 	 */
 	public function __call($name, $args = null) {
 		$method = 'create'.ucfirst($name);
-		$args = (!empty($args) && is_array($args))? $args[0] : null;
-		return method_exists($this, $method)? $this->{$method}($args) : null;
+		return method_exists($this, $method)? ((empty($args) || !is_array($args))? $this->{$method}() : call_user_func_array([$this, $method], $args)) : null;
+	}
+
+
+
+	/**
+	 * Generates a context object
+	 */
+	protected function context() {
+		static $context;
+		if (!isset($context)) {
+			$context = new Context;
+		}
+		return $context;
 	}
 
 

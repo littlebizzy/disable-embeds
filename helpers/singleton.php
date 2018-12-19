@@ -6,7 +6,7 @@ namespace LittleBizzy\DisableEmbeds\Helpers;
 /**
  * Singleton class
  *
- * @package Disable Embeds
+ * @package WordPress Plugin
  * @subpackage Helpers
  */
 abstract class Singleton {
@@ -39,8 +39,9 @@ abstract class Singleton {
 		static $instance = null;
 
 		// Check instance
-		if (!isset($instance))
+		if (!isset($instance)) {
 			$instance = new static($plugin);
+		}
 
 		// Done
 		return $instance;

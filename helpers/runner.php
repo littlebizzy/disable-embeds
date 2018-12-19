@@ -6,7 +6,7 @@ namespace LittleBizzy\DisableEmbeds\Helpers;
 /**
  * Runner class
  *
- * @package Disable Embeds
+ * @package WordPress Plugin
  * @subpackage Helpers
  */
 class Runner {
@@ -31,7 +31,7 @@ class Runner {
 
 		// Static method
 		} else {
-			call_user_func_array(array($plugin->packageNamespace.$who, $method), [$plugin]);
+			call_user_func_array([$plugin->packageNamespace.$who, $method], [$plugin]);
 		}
 	}
 

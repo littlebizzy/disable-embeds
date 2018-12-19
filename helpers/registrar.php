@@ -13,15 +13,10 @@ namespace LittleBizzy\DisableEmbeds\Helpers;
  *		 return new Helpers\Registrar($this->plugin);
  * 	}
  *
- * @package Disable Embeds
+ * @package WordPress Plugin
  * @subpackage Helpers
  */
 class Registrar {
-
-
-
-	// Properties
-	// ---------------------------------------------------------------------------------------------------
 
 
 
@@ -29,25 +24,6 @@ class Registrar {
 	 * Plugin object
 	 */
 	private $plugin;
-
-
-
-	/**
-	 * Handler object
-	 */
-	private $handler;
-
-
-
-	/**
-	 * Temp instance
-	 */
-	private static $instance;
-
-
-
-	// Initialization
-	// ---------------------------------------------------------------------------------------------------
 
 
 
@@ -65,36 +41,20 @@ class Registrar {
 	 */
 	public function setHandler($handler) {
 
-		// Set object
-		$this->handler = $handler;
-
 		// Check activation support
-		if (method_exists($this->handler, 'onActivation'))
-			register_activation_hook($this->plugin->file, array($this->handler, 'onActivation'));
+		if (method_exists($handler, 'onActivation')) {
+			register_activation_hook($this->plugin->file, [$handler, 'onActivation']);
+		}
 
 		// Check deactivation support
-		if (method_exists($this->handler, 'onDeactivation'))
-			register_deactivation_hook($this->plugin->file, array($this->handler, 'onDeactivation'));
-
-		// Check uninstall support, points to a local static method
-		if (method_exists($this->handler, 'onUninstall')) {
-			self::$instance = $this;
-			register_uninstall_hook($this->plugin->file, array('\\'.__CLASS__, 'onUninstall'));
+		if (method_exists($handler, 'onDeactivation')) {
+			register_deactivation_hook($this->plugin->file, [$handler, 'onDeactivation']);
 		}
-	}
 
-
-
-	// WP Hooks
-	// ---------------------------------------------------------------------------------------------------
-
-
-
-	/**
-	 * Plugin uninstall wrapper
-	 */
-	public static function onUninstall() {
-		self::$instance->handler->onUninstall();
+		// Check uninstall support
+		if (method_exists($handler, 'onUninstall')) {
+			register_uninstall_hook($this->plugin->file, ['\\'.get_class($handler), 'onUninstall']);
+		}
 	}
 
 

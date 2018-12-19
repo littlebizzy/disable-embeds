@@ -6,7 +6,7 @@ namespace LittleBizzy\DisableEmbeds\Helpers;
 /**
  * Plugin class
  *
- * @package Disable Embeds
+ * @package WordPress Plugin
  * @subpackage Helpers
  */
 class Plugin {
