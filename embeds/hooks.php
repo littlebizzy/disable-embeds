@@ -161,8 +161,21 @@ class Hooks {
 	public function providers($currentProviders) {
 
 		// Check input value
-		if (empty($currentProviders) || !is_array($currentProviders))
+		if (empty($currentProviders) || !is_array($currentProviders)) {
 			return $currentProviders;
+		}
+
+		// Define custom unsupported providers
+		$newProviders = [
+			'#https?://(www\.)?scribd\.com/document/.*#i' => ['https://www.scribd.com/services/oembed', true],
+		];
+
+		// Add custom unsupported providers
+		foreach ($newProviders as $newProviderkey => $newProviderInfo) {
+			if (!isset($currentProviders[$newProviderkey])) {
+				$currentProviders[$newProviderkey] = $newProviderInfo;
+			}
+		}
 
 		// Init
 		$providers = [];
