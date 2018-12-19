@@ -56,6 +56,11 @@ class Hooks {
 	 */
 	public function init() {
 
+		// Check main plugin constant
+		if (defined('DISABLE_EMBEDS') && !DISABLE_EMBEDS) {
+			return;
+		}
+
 		// Actions and filters
 		$this->handle();
 
