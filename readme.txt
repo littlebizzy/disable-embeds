@@ -136,10 +136,11 @@ Please avoid leaving negative reviews in order to get a feature implemented. Ins
 * tested with PHP 7.1
 * tested with PHP 7.2
 * tested with PHP 5.6 (no fatal errors only)
+* support for `DISABLE_EMBEDS`
 * better support with our Custom Functions plugin (late constants definition)
 * fixed SoundCloud embeds in certain environments
 * fixed Scribd embeds in certain environments
-* disables WordPress.org embeds
+* supports alternative Scribd `/document/` embed in addition to default `/doc/` embed URI)
 
 = 1.2.0 =
 * tested with WP 5.0
