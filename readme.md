@@ -11,8 +11,8 @@ Disables both external and internal embedding functions to avoid slow page rende
     define('DISABLE_NAG_NOTICES', true);
     
     /* Disable Embeds Functions */
-    define('DISABLE_EMBEDS', 'true');
-    define('DISABLE_EMBEDS_ALLOWED_SOURCES', 'none');
+    define('DISABLE_EMBEDS', 'true'); // default = true
+    define('DISABLE_EMBEDS_ALLOWED_SOURCES', 'youtube,twitter,scribd'); // default = none (blank)
 
 ### Compatibility
 
